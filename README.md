@@ -1,4 +1,4 @@
-# RNVideo-Player-
+# RNVideo Player
 
 This video player app has a control bar in which the user can mute and play/pause the video from the current screen.
 
