@@ -7,10 +7,10 @@ export default function App() {
 	const video = useRef(null);
 	const [mute, setMute] = useState(false);
 	const [shouldPlay, setShouldPlay] = useState(true);
-	const [status, setStatus] = React.useState({});
+	const [status, setStatus] = useState({});
 	const { width } = Dimensions.get("window");
 
-	console.log(status, "status");
+	// console.log(status, "status");
 
 	const handlePlayAndPause = () => {
 		setShouldPlay(!shouldPlay);
@@ -30,13 +30,13 @@ export default function App() {
 						width,
 						height: 200,
 					}}
-					// source={{
-					// 	uri: "https://hls.ted.com/project_masters/3875/manifest.m3u8",
-					// }}
-					source={{ uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4" }}
-					useNativeControls
+					source={{
+						uri: "https://hls.ted.com/project_masters/3875/manifest.m3u8",
+					}}
+					// source={{ uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4" }}
+					useNativeControls={true}
 					resizeMode='contain'
-					isLooping
+					isLooping={false}
 					shouldPlay={shouldPlay}
 					isMuted={mute}
 					onPlaybackStatusUpdate={(status) => setStatus(() => status)}
@@ -44,13 +44,13 @@ export default function App() {
 			</View>
 			<View style={styles.controlBar}>
 				<MaterialIcons
-					name={mute ? "volume-mute" : "volume-up"}
+					name={status.isMuted ? "volume-mute" : "volume-up"}
 					size={45}
 					color='white'
 					onPress={handleVolume}
 				/>
 				<MaterialIcons
-					name={shouldPlay ? "pause" : "play-arrow"}
+					name={status.isPlaying ? "pause" : "play-arrow"}
 					size={45}
 					color='white'
 					onPress={handlePlayAndPause}
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		left: 0,
 		right: 0,
-		height: 45,
+		height: 50,
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center",
