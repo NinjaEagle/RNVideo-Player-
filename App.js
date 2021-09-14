@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
-import { View, StyleSheet, Button, SafeAreaView, Dimensions, Text } from "react-native";
+import { View, StyleSheet, SafeAreaView, Dimensions, Text } from "react-native";
 import { Video } from "expo-av";
-import { MaterialIcons, Octicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function App() {
 	const video = useRef(null);
@@ -10,7 +10,7 @@ export default function App() {
 	const [status, setStatus] = useState({});
 	const { width } = Dimensions.get("window");
 
-	// console.log(status, "status");
+	// console.log(status.isMuted, "status mute", "status play", status.isPlaying);
 
 	const handlePlayAndPause = () => {
 		setShouldPlay(!shouldPlay);
@@ -33,7 +33,6 @@ export default function App() {
 					source={{
 						uri: "https://hls.ted.com/project_masters/3875/manifest.m3u8",
 					}}
-					// source={{ uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4" }}
 					useNativeControls={true}
 					resizeMode='contain'
 					isLooping={false}
@@ -71,18 +70,12 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		backgroundColor: "#fafafa",
 	},
-
-	buttons: {
-		flexDirection: "row",
-		justifyContent: "center",
-		alignItems: "center",
-	},
 	controlBar: {
+		height: 50,
 		position: "absolute",
 		bottom: 0,
 		left: 0,
 		right: 0,
-		height: 50,
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center",
